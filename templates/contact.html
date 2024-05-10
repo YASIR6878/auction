@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        height: 500px;
+        width: 100%;
+        margin-top: 80px;
+    }
+
+    .row {
+        background: #ff9b00;
+        padding: 2%;
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        width: 250px;
+    height: 379px;
+    }
+
+    .row img {
+        margin-bottom: 10%;
+    }
+
+    .row h2 {
+        margin-bottom: 5%;
+        font-weight: 700;
+        font-size: 23px;
+    }
+    .row h4 {
+    
+        font-weight: 600;
+        font-size: 23px;
+    }
+
+
+    .contact-form{
+        width: 380px;
+        height: 379px;
+        border: 2px solid #ff9b00;
+    }
+    .contact-form label {
+        font-weight: 600;
+    font-size: 22px;
+    }
+
+    .contact-form button {
+        background: #25274d;
+        color: #fff;
+        font-weight: 600;
+        width: 20%; 
+        padding: 10px;
+        margin-left: 4cm;
+    }
+
+    .contact-form button:hover {
+        background: #ff9b00;
+    }
+
+    .contact-form button:focus {
+        box-shadow: none;
+    }
+    .form-control{
+        width: 363px;
+    height: 52px;
+    border: 1px solid black;
+    border-radius: 5px;
+    }
+   
+</style>
+<div class="container">
+    <div class="row">
+        
+            <div class="contact-info">
+                <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image" />
+                <h2>Contact Me</h2>
+                <h4>I would love to hear from you!</h4>
+            </div>
+    </div>
+    <div class="contact-form">
+    <form method="post" action="/contact_us" style="margin-left: 13px;">
+        {% csrf_token %}
+                  
+                        
+                                <input type="text" class="form-control" id="name" placeholder="your name" name="name" required>
+                
+            
+                    
+                        
+                                <input type="email" class="form-control" id="email" placeholder="example@gmail.com" name="email" required>
+                
+                        
+                    
+                                <input type="tel" class="form-control" id="phone" placeholder="+91 0000 0000 00" name="phone" required>
+            
+                
+                    
+                            <label class="control-label col-sm-2" for="message">Comment:</label>
+                            
+                                <textarea class="form-control" rows="5" id="message" name="message" required></textarea>
+        
+                                <button type="submit" class="btn">SUBMIT</button>
+              
+                 </form>
+                </div>
+</div>
+{% endblock content %}

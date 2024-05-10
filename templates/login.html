@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mb-5 bg-cover" style="background-image: url('https://files.123freevectors.com/wp-content/original/110933-dark-color-blurred-background-vector.jpg');height: 500px;width: 1260px;margin-top:-61px;margin-left: -24px;margin-bottom:0px;">
+<div class="h-400 w-300 flex justify-center items-center mt-9"style="margin-top:36px;">
+   
+    <form action="{% url 'home:loginuser' %}" method="post" class="w-full max-w-sm p-4 bg-aqua rounded-lg shadow-md">
+      {% csrf_token %}
+        <h2 class="text-blue-500 flex justify-center mb-2 mt-14 font-bold">AUCTION</h2>
+      <input type="text" name="username" placeholder="Username" class="w-full mb-2 p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500" required>
+      <input type="email" name="email" placeholder="Email" class="w-full mb-2 p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+      <input type="password" name="pass1" placeholder="Password" class="w-full mb-2 p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+      <input type="submit" value="Login" class="w-full p-2 bg-blue-500 text-white font-semibold rounded-md cursor-pointer hover:bg-blue-600">
+      <a href="{% url "home:signup" %}" style="display: flex;justify-content: center;color: deepskyblue;">Don't have an Account?</a>
+    </form>
+</div>
+  
+{% endblock content %}
+

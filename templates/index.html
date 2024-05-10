@@ -1,0 +1,33 @@
+{% extends "base2.html" %}
+{% block content %}
+
+<div class="top" style="display: flex;justify-content: space-between;">
+<h1 style="margin-left: 12cm;">{{ title }}</h1>
+<h3 style="margin-top: -14px; font-family: Arial, sans-serif; font-size: 20px; color: #333; text-align: center; position: fixed;">Hello, {{user}}</h3>
+</div>
+{% if auction_list %}
+    <div class="wrapper">
+    {% for auction in auction_list %}
+       
+        <a class="auction-card" href="{% url 'home:detail' auction.id %}">
+            <div><img class="auction_image_index" src="{{ auction.image.url }}"></div>
+            <div class="auction-card-title">{{ auction.title }}</div>
+            {% if auction.is_active %}
+                {% if auction.remaining_minutes < 2 %}
+                    <div class="auction-card-urgent">Less than {{ auction.remaining_minutes }}m</div>
+                {% else %}
+                    <div class="auction-card-active">Less than {{ auction.remaining_minutes }}m</div>
+                {% endif %}
+            {% else %}
+            <div class="auction-card-inactive">Expired</div>
+            {% endif %}
+            <div class="auction-card-value">{{ auction.min_value }}$</div>
+        </a>
+        <!-- <li class="auction-card"><a href="{% url 'home:detail' auction.id %}">{{ auction.title }}</a></li> -->
+    {% endfor %}
+    </div>
+{% else %}
+    <h4>No auctions are available.</h4>
+{% endif %}
+
+{% endblock %}

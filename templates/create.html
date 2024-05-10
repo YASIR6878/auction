@@ -1,0 +1,102 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+    /* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply a basic body style */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Style the wrapper div */
+.wrapper {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form elements */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+span {
+    font-weight: bolder;
+    margin-bottom: 5px;
+}
+
+.textbox, .description_box, .duration, .submit_button {
+    margin-bottom: -15px;
+    padding: 6px;
+    width: 100%;
+    background-color: darkgray;
+    font-weight: bolder;
+}
+
+.description_box {
+    height: 85px;
+}
+
+/* Style the submit button */
+.submit_button {
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Add hover effect to submit button */
+.submit_button:hover {
+    background-color: #45a049;
+}
+.duration{
+    border: none;
+}
+
+</style>
+<div class="top" style="display: flex;justify-content: space-between;">
+    <h1 style="margin-left: 12.5cm;">Create Auction</h1>
+    <h3 style="margin-top: -14px; font-family: Arial, sans-serif; font-size: 20px; color: #333; text-align: center; position: fixed;">Hello, {{user}}</h3>
+    </div>
+<div class="wrapper">
+    <form action="{% url 'home:create' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <span>Enter title:</span>
+        <br>
+        <input class="textbox" type="text" name="title" required>
+        <br>
+        <br>
+        <span>Enter description:</span>
+        <br>
+        <input class="description_box" type="text" name="description" required>
+        <br>
+        <span>Your Contact:</span>
+        <br>
+        <input class="textbox" type="text" name="contact" required>
+        <br>
+        <span>Enter Duration:</span>
+        <br>
+        <input class="duration" type="number" name="duration" required>
+        <br>
+        <br>
+        <span>Upload picture:</span>
+        <br>
+        <input class="textbox" type="file" name="img" required>
+        <br>
+        <br>
+        <span>Enter minimum value:</span>
+        <br>
+        <input class="textbox" type="text" name="min_value" required>
+        <br>
+        <br>
+        <input type="submit" class="submit_button" name="submit_button" value="Create">
+    </form>
+</div>
+{% endblock %}

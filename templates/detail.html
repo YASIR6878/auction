@@ -1,0 +1,73 @@
+{% extends "base2.html" %}
+{% block content %}
+
+{% block title %}<title>{{ auction.title }}Bidding</title>{% endblock %}
+<style>
+    span{
+        font-weight: bolder;
+    }
+    .textbox{
+        background-color: darkgrey;
+    }
+    .desc_box{
+        background-color: darkgray;
+        font-weight: bold;
+    }
+</style>
+<div class="top" style="display: flex;justify-content: space-between;">
+    <h1 style="margin-left: 13cm;">{{ auction.title }}</h1>
+    <h3 style="margin-top: -14px; font-family: Arial, sans-serif; font-size: 20px; color: #333; text-align: center; position: fixed;">Hello, {{user}}</h3>
+    </div>
+<div class="wrapper">
+    <span class="auction-card">
+        <span><img class="auction_image_index" src="{{ auction.image.url }}"></span>
+            {% if auction.is_active %}
+                {% if auction.remaining_minutes < 2 %}
+                    <div class="auction-card-urgent">Less than {{ auction.remaining_minutes }}m</div>
+                {% else %}
+                    <div class="auction-card-active">Less than {{ auction.remaining_minutes }}m</div>
+                {% endif %}
+            {% else %}
+            <div class="auction-card-inactive">Expired</div>
+            {% endif %}
+            <div class="auction-card-value">{{ auction.min_value }}$</div>
+        </div>
+    </span>
+</div>
+<div class="wrapper">
+    {% if not own_auction %}
+        {% if auction.is_active %}
+        <!-- <div class="bid_box"> -->
+        <form action="{% url 'home:bid' auction.id %}" method="post">
+        <!-- <form action="/auctions/{{ auction.id }}/bid/" method="post"> -->
+        {% csrf_token %}
+        <div class="input_label">
+        {% if error_message %}<p class="error" style="margin-left: 52px;" ><strong>{{ error_message }}</strong></p>{% endif %}
+        
+        <h3> Current bid: {% if  auction.resolve %}{{ auction.resolve }}{% else %}No bids yet{% endif %} </h3>
+
+        
+        <span>Enter amount ($):</span>
+        <span class="required_field" >*</span>
+        </div>
+        <input class="textbox" type="text" class="input_box" name="amount">
+        <br>
+        <a><input class="submit_button" type="submit" class="submit_button" value="Bid"></a>
+        </form>
+        <br>
+        <!-- </div> -->
+        {% endif %}
+    {% endif %}
+</div>
+
+{% if auction.desc %}
+<div class="wrapper">
+    <div class="desc_box">
+    <div class="desc_box_title">Description</div>
+    <hr>
+    {{ auction.desc }}
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
